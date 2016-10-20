@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg id="svg2" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" height="250.99mm" width="250.99mm" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 889.31807 889.31806" xmlns:dc="http://purl.org/dc/elements/1.1/">
+ <title id="title4145">Candle Flame</title>
+ <defs id="defs4">
+  <radialGradient id="radialGradient4191" gradientUnits="userSpaceOnUse" cy="526.18" cx="372.05" gradientTransform="matrix(1.2029 0 0 1.2029 -75.485 -106.76)" r="370.66">
+   <stop id="stop4187" stop-color="#fcb900" offset="0"/>
+   <stop id="stop4189" stop-color="#fcb900" stop-opacity="0" offset="1"/>
+  </radialGradient>
+ </defs>
+ <metadata id="metadata7">
+  <rdf:RDF>
+   <cc:Work rdf:about="">
+    <dc:format>image/svg+xml</dc:format>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:title>Candle Flame</dc:title>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <g id="layer1" transform="translate(72.612 -81.522)">
+  <circle id="path4173" cx="372.05" cy="526.18" r="444.66" fill="url(#radialGradient4191)"/>
+  <path id="path4142" d="m406.08 333.01c-49.441 33.43-91.944 77.073-124.05 127.38-19.513 30.573-35.39 64.15-40.742 100.02-5.3522 35.872 0.65033 74.344 21.593 103.96 13.156 18.602 31.759 33.114 52.554 42.423 20.795 9.3095 43.72 13.509 66.503 13.358 26.34-0.17416 53.017-6.2969 75.319-20.312 22.303-14.015 39.87-36.359 45.403-62.112 5.498-25.592-0.99197-52.436-11.748-76.3s-25.652-45.597-38.205-68.567c-26.827-49.087-42.855-104.04-46.624-159.85z" fill-rule="evenodd" fill="#ffa52a"/>
+  <path id="path4142-7" d="m385.44 545.76c-19.604 13.339-36.45 30.711-49.179 50.715-7.7502 12.179-14.055 25.549-16.178 39.828-2.1233 14.279 0.2631 29.588 8.5867 41.383 5.2124 7.3862 12.578 13.162 20.821 16.874 8.2428 3.7122 17.338 5.3962 26.378 5.3347 10.456-0.0711 21.043-2.5309 29.881-8.119 8.8382-5.588 15.785-14.473 17.978-24.697 2.1841-10.184-0.387-20.864-4.6519-30.366-4.2649-9.5022-10.173-18.162-15.152-27.31-10.642-19.555-16.995-41.43-18.484-63.643z" fill-rule="evenodd" fill="#fdfdfd"/>
+ </g>
+</svg>
