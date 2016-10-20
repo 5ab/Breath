@@ -19,12 +19,16 @@
         display: block; 
         margin-left: auto; 
         margin-right: auto;
-        animation: rhythm 5s ease-in-out alternate infinite;
       }
-       @keyframes rhythm {
-        from { opacity: 0.25; }
-        to { transform: scale(1.05,1.05); }
-       }
+      object {
+        width: 100%;
+        margin: auto;
+        animation: rhythm 5s cubic-bezier(.65,.07,.41,.94) alternate infinite;
+      }
+      @keyframes rhythm {
+        from {opacity: 0.25;}
+        to {transform: scale(1.15,1.15);
+      }
     </style>
   </head>
   
@@ -35,7 +39,11 @@
           <h1>Breath</h1>
           <p>Relaxing rhythmic breathing</p>
         </div>
-        <p><img src="images/wikicommons-256px-candle.jpg" alt=" A burning candle."></p>
+        
+        <object type="image/svg+xml" data="images/candle-flame.svg" class="logo">
+            <!-- fallback image  may not be styled -->
+            <img src="images/wikicommons-256px-candle.jpg" alt=" A burning candle.">
+        </object>
         <br>
         <br>    
         <br>
