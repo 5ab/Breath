@@ -20,10 +20,10 @@
         margin-left: auto; 
         margin-right: auto;
       }
+    /*  The pulsing of the whole SVG  */
+      
       svg {
-        
-      }
-      object {
+        --innerFlameColour: pink;
         width: 100%;
         margin: auto;
         animation: rhythm 5s cubic-bezier(.65,.06,.47,.95) alternate infinite;
@@ -33,12 +33,42 @@
         from {
           opacity: 0.25;
           transform: scale(0.85,0.85);
+          transform: skewX(-3deg)
+        }
+        to {
+          transform: skewX(6deg)
         }
       }
       -webkit-@keyframes rhythm {
-        ffrom {
+        from {
           opacity: 0.25;
           transform: scale(0.85,0.85);
+          transform: skewX(-3deg)
+        }
+        to {
+          transform: skewX(6deg)
+        }
+      }
+    /*  Tweaking colours, later duration & timing  */
+      #innerFlame:hover {
+       fill: var(--innerFlameColour);
+      }
+      #outerFlame {
+      }
+    /*  The orbiting of the spot  */
+    /*  NOTE Firefox doesn't understand 'transform-origin: center;'  */
+      #aura {
+        transform-origin: 395px 504px;
+        animation: orbit 10s linear infinite;
+      }
+      @keyframes orbit {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      -webkit-@keyframes orbit {
+        to {
+          transform: rotate(360deg);
         }
       }
     </style>
@@ -51,14 +81,28 @@
           <h1>Breath</h1>
           <p>Relaxing rhythmic breathing</p>
         </div>
-        
-        <object type="image/svg+xml" data="images/candle-flame.svg" class="logo">
-            <!-- fallback image  may not be styled -->
-            <img src="images/wikicommons-256px-candle.jpg" alt=" A burning candle.">
-        </object>
+        <svg height="550" width="550" viewBox="0 0 550 550">
+          <title> Candle Flame </title>
+          <defs>
+            <radialGradient id="rGrad" gradientUnits="userSpaceOnUse" cy="526" cx="372" gradientTransform="translate(128 127) scale(0.7)" r="370">
+            <stop stop-color="#fcb900" offset="0"/>
+            <stop stop-color="#fcb900" stop-opacity="0" offset="1"/>
+            </radialGradient>
+          </defs>
+          <g transform="translate(-129 -238)">
+            <g id="aura">
+              <circle id="glow" cx="395" cy="504" r="265" fill="url(#rGrad)"/>
+              <circle id="spot" cx="395" cy="745" r="15" fill="#"/>
+            </g>
+            <path id="flame" d="M412 403c -26 17 -48 40 -64 67 -10 16 -18 33 -21 52 -3 19 0.3  39 11 54 7 10 16 17 27 22s 23 7 34 7c 14 0 28 -3 39 -11 12 -7 21 -19 24 -32 3 -13 -0.5 -27 -6 -40 -6 -12 -13 -24 -20 -36 -14 -25 -22 -54 -24 -83z" fill-rule="evenodd"/>
+            <use id="outerFlame" xlink:href="#flame" transform="matrix(1.1503 0 0 1.1383 -55.826 -73.362)" height="100%" width="100%" fill="#ffa52a"/>
+            <use id="innerFlame" xlink:href="#flame" transform="matrix(.398 0 0 .398 237.62 364.97)" height="100%" width="100%" fill="#fdfdfd"/>
+          </g>
+        </svg>
         <br>
         <br>    
         <br>
+        
         <p>
           Coming.. A simple place to practice paced rhythmic breathing.  Studies have shown this to be a very effective way of reducing stress.  And improving concentration and well being.
         </p>
