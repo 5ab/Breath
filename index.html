@@ -12,6 +12,7 @@
     <!--[if lt IE 8]>
     <link rel="stylesheet" href="stylesheets/ie.css">
     <![endif]-->
+    <!--[if !IE]><script>fixScale(document);</script><![endif]--> 
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <!--  My Styles  -->
     <style>
@@ -20,20 +21,25 @@
         margin-left: auto; 
         margin-right: auto;
       }
-    /*  =====  Tweaking colours, later duration & timing  =====  */
+    /*  -----  Tweaking colours, later duration & timing  -----  */
+    /*  I should only need to specify ':root'  */
+      body, :root {
+        --innerFlameColour: pink;
+        --duration: 10s;
+        --halfTime: calc(var(--duration)/2);
+      }
       #innerFlame:hover {
-       fill: var(--innerFlameColour);
+        fill: var(--innerFlameColour);
       }
       #outerFlame {
       }
-    /* ===== The pulsing of the whole SVG ===== */
+    /*  -----  The pulsing of the whole SVG  -----  */
       svg {
-        --innerFlameColour: pink;
         width: 100%;
         margin: auto;
         transform: scale(0.8,0.8);
-        animation: rhythm 5s cubic-bezier(.65,.06,.47,.95) alternate infinite;
-        -webkit-animation: rhythm 5s cubic-bezier(.65,.06,.47,.95) alternate infinite;
+        animation: rhythm var(--halfTime) cubic-bezier(.65,.06,.47,.95) alternate infinite;
+        -webkit-animation: rhythm var(--halfTime) cubic-bezier(.65,.06,.47,.95) alternate infinite;
       }
       @keyframes rhythm {
         from { opacity: 0.25; }
@@ -43,11 +49,11 @@
         from { opacity: 0.25; }
         to { transform: scale(1.1,1.1); }
       }
-    /*  =====  The drifting (rotating) of the flames  =====  */
+    /*  -----  The drifting (rotating) of the flames  -----  */
       #flames {
         transform-origin: 395px 550px;
-        animation: drift 5s cubic-bezier(.65,.06,.47,.95) alternate infinite;
-        -webkit-animation: drift 5s cubic-bezier(.65,.06,.47,.95) alternate infinite;
+        animation: drift var(--halfTime) cubic-bezier(.65,.06,.47,.95) alternate infinite;
+        -webkit-animation: drift var(--halfTime) cubic-bezier(.65,.06,.47,.95) alternate infinite;
       }
       @keyframes drift {
         from { transform: rotate(-7deg); }
@@ -57,13 +63,13 @@
         from { transform: rotate(-7deg); }
         to { transform: rotate(5deg); }
       }
-    /*  =====  The orbiting of the Spot  =====  */
+    /*  -----  The orbiting of the Spot  -----  */
     /*  NOTE Firefox doesn't understand 'transform-origin: center;'  */
       #spot {
         fill: #e3a400;
         opacity: 0.5;
         transform-origin: 395px 504px;
-        animation: orbit 10s linear infinite;
+        animation: orbit var(--duration) linear infinite;
       }
       @keyframes orbit {
         to { transform: rotate(360deg); }
@@ -81,9 +87,13 @@
           <h1>Breath</h1>
           <p>Relaxing rhythmic breathing</p>
         </div>
-        <svg height="550" width="550" viewBox="0 0 550 550">
+        <?xml-stylesheet type="text/css" href="svg.css" ?>
+        <svg height="550" width="550" viewBox="0 0 550 550" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
           <title> Candle Flame </title>
           <defs>
+            <filter id="gBlur">
+              <feGaussianBlur stdDeviation="1" />
+            </filter>
             <radialGradient id="rGrad1" gradientUnits="userSpaceOnUse" cx="372" cy="526" gradientTransform="translate(128 127) scale(0.7)" r="370">
               <stop stop-color="#fcb900" offset="0"/>
               <stop stop-color="#fcb900" stop-opacity="0" offset="1"/>
@@ -92,7 +102,7 @@
           <g transform="translate(-129 -238)">
             <g id="aura">
               <circle id="glow" cx="395" cy="504" r="265" fill="url(#rGrad1)"/>
-              <circle id="spot" cx="395" cy="745" r="10" fill="url(#rGrad1)"/>
+              <circle id="spot" cx="395" cy="745" r="10" filter="url(#gBlur)"/>
             </g>
             <g id="flames">
               <path id="flamePath" d="M412 403c -26 17 -48 40 -64 67 -10 16 -18 33 -21 52 -3 19 0.3  39 11 54 7 10 16 17 27 22s 23 7 34 7c 14 0 28 -3 39 -11 12 -7 21 -19 24 -32 3 -13 -0.5 -27 -6 -40 -6 -12 -13 -24 -20 -36 -14 -25 -22 -54 -24 -83z" fill-rule="evenodd"/>
@@ -102,14 +112,41 @@
           </g>
         </svg>
         <br>
-        <br>    
+        <br> 
+        <input id="setDur" oninput="seDuration(this)" value="" type=number placeholder="" min="5" max="30" maxlength="2" size="3" autofocus>  Set the speed here
         <br>
-        
+        <br>
         <p>
           Coming.. A simple place to practice paced rhythmic breathing.  Studies have shown this to be a very effective way of reducing stress.  And improving concentration and well being.
         </p>
       </section>
     </div>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]--> 
   </body>
+  <!--      MY SCRIPTS      -->
+  <script>
+    
+    var styles = window.getComputedStyle(document.body)
+    var duration = styles.getPropertyValue("--duration");
+    
+    document.getElementById("setDur").value=Number(duration.slice(0,-1));
+    
+  //  Keeping input to 'max'.  And updating the CSS variable 'duration'  //
+    var seDuration = function (object) {
+      object.value = Number(object.value) > Number(object.max) ? object.max : object.value ;
+      document.body.style.setProperty("--duration", object.value+"s");
+    }
+    
+    
+    
+  </script>
 </html>
+<!--     NOTES
+Working in Chrome 54.
+Rotation not working in IE.
+Rotation of spot not working in Firefox.  Weird?
+Pulsing not working in IE.
+Adding the xlin xmins version stuff didn't make a difference.
+Not checked recently in Safari?
+May have to resort to controlling more with JS instead of CSS?
+Changing the 'duration' with JS in Chrome & FF works for both 'body' & ":root'.
+-->
