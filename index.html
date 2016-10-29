@@ -49,19 +49,19 @@
         from { opacity: 0.25; }
         to { transform: scale(1.1,1.1); }
       }
-    /*  -----  The drifting (rotating) of the flames  -----  */
+    /*  -----  The drifting (rotating/skewing) of the flames  -----  */
       #flames {
         transform-origin: 395px 550px;
         animation: drift var(--halfTime) cubic-bezier(.65,.06,.47,.95) alternate infinite;
         -webkit-animation: drift var(--halfTime) cubic-bezier(.65,.06,.47,.95) alternate infinite;
       }
       @keyframes drift {
-        from { transform: rotate(-7deg); }
-        to { transform: rotate(5deg); }
+        from { transform: skew(-5deg); }
+        to { transform: skew(7deg); }
       }
       -webkit-@keyframes drift {
-        from { transform: rotate(-7deg); }
-        to { transform: rotate(5deg); }
+        from { transform: skew(-5deg); }
+        to { transform: skew(7deg); }
       }
     /*  -----  The orbiting of the Spot  -----  */
     /*  NOTE Firefox doesn't understand 'transform-origin: center;'  */
