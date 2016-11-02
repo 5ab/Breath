@@ -4,8 +4,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>Breath by 5ab</title>
+  
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/github-dark.css">
+
     <!--[if lt IE 9]>
       <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -49,19 +51,19 @@
         from { opacity: 0.25; }
         to { transform: scale(1.1,1.1); }
       }
-    /*  -----  The drifting (rotating/skewing) of the flames  -----  */
+    /*  -----  The drifting (rotating) of the flames  -----  */
       #flames {
         transform-origin: 395px 550px;
         animation: drift var(--halfTime) cubic-bezier(.65,.06,.47,.95) alternate infinite;
         -webkit-animation: drift var(--halfTime) cubic-bezier(.65,.06,.47,.95) alternate infinite;
       }
       @keyframes drift {
-        from { transform: skew(-5deg); }
-        to { transform: skew(7deg); }
+        from { transform: rotate(-7deg); }
+        to { transform: rotate(5deg); }
       }
       -webkit-@keyframes drift {
-        from { transform: skew(-5deg); }
-        to { transform: skew(7deg); }
+        from { transform: rotate(-7deg); }
+        to { transform: rotate(5deg); }
       }
     /*  -----  The orbiting of the Spot  -----  */
     /*  NOTE Firefox doesn't understand 'transform-origin: center;'  */
@@ -113,11 +115,17 @@
         </svg>
         <br>
         <br> 
-        <input id="setDur" oninput="seDuration(this)" value="" type=number placeholder="" min="5" max="30" maxlength="2" size="3" autofocus>  Set the speed here
+        <form onsubmit="setDuration(); return false">
+          <button onclick="minusDuration()" type="button"> MINUS </button> 
+          <input id="inputDur" oninput="" value="" type="number" placeholder="" min="5" max="30" maxlength="2" size="3" autofocus>  
+          <button onclick="plusDuration()" type="button"> PLUS </button> Set the speed here
+          <input type="submit" value="SUBMIT">
+        </form>
         <br>
         <br>
         <p>
           Coming.. A simple place to practice paced rhythmic breathing.  Studies have shown this to be a very effective way of reducing stress.  And improving concentration and well being.
+          NOTE: Doesn't currently work in Internet Explorer 
         </p>
       </section>
     </div>
@@ -125,18 +133,29 @@
   <!--      MY SCRIPTS      -->
   <script>
     
-    var styles = window.getComputedStyle(document.body)
-    var duration = styles.getPropertyValue("--duration");
-    
-    document.getElementById("setDur").value=Number(duration.slice(0,-1));
-    
-  //  Keeping input to 'max'.  And updating the CSS variable 'duration'  //
-    var seDuration = function (object) {
-      object.value = Number(object.value) > Number(object.max) ? object.max : object.value ;
-      document.body.style.setProperty("--duration", object.value+"s");
-    }
-    
-    
+    var styles = window.getComputedStyle(document.body),
+      duration = styles.getPropertyValue("--duration"),
+      inputDur = document.getElementById("inputDur");
+    inputDur.value=Number(duration.slice(0,-1));
+
+  //  Keeping input to 'max' & 'min'.  And updating the CSS variable 'duration'  //
+    //   This is not perfect, 12, 23 etc are prevented!   //
+    var checkDuration = function () {
+      inputDur.value = Number(inputDur.value) > Number(inputDur.max) ? inputDur.max : inputDur.value ;
+      inputDur.value = Number(inputDur.value) < Number(inputDur.min) ? inputDur.min : inputDur.value ;
+    };
+    var minusDuration = function () {
+      inputDur.value -- ;
+      checkDuration();
+    };
+    var plusDuration = function () {
+      inputDur.value ++ ;
+      checkDuration();
+    };
+    var setDuration = function () {
+      var inputTime = String(inputDur.value);
+      document.body.style.setProperty("--duration", inputTime+"s");
+    };
     
   </script>
 </html>
@@ -149,4 +168,5 @@ Adding the xlin xmins version stuff didn't make a difference.
 Not checked recently in Safari?
 May have to resort to controlling more with JS instead of CSS?
 Changing the 'duration' with JS in Chrome & FF works for both 'body' & ":root'.
+addEventListener("keypress", function(event) { document.body.innerHTML+=(fromCharCode(event.charCode));
 -->
