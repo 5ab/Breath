@@ -117,7 +117,7 @@
     <br> 
     <form onsubmit="setDuration(); return false">
       <button onclick="minusDuration()" type="button"> - </button> 
-      <input id="inputDur" oninput="" value="" type="number" placeholder="" maxlength="2" size="3" autofocus>  
+      <input id="inputDur" oninput="checkMinus()" value="" type="number" placeholder="" autofocus>  
       <button onclick="plusDuration()" type="button"> + </button> Set the speed here
       <input type="submit" value="SUBMIT">
     </form>
@@ -141,25 +141,25 @@
   //  Keeping input to 'max' & 'min'.  And updating the CSS variable 'duration'  //
     //   This is not perfect, 12, 23 etc are prevented!   //
     var checkMinus = function () {
-      inputDur.value = Math.abs(inputDur.value);
+      
     };
-    var checkDuration = function () {
+    var checkMinus = function () {
+      inputDur.value = inputDur.value == "-" ? "" : inputDur.value ;
+    };
+    var checkInput = function () {
       inputDur.value = Number(inputDur.value) > max ? max : inputDur.value ;
       inputDur.value = Number(inputDur.value) < min ? min : inputDur.value ;
     };
     var minusDuration = function () {
-      checkMinus();
       inputDur.value -- ;
-      checkDuration();
+      checkInput();
     };
     var plusDuration = function () {
-      checkMinus();
       inputDur.value ++ ;
-      checkDuration();
+      checkInput();
     };
     var setDuration = function () {
-      checkMinus();
-      checkDuration();
+      checkInput();
       var inputTime = String(inputDur.value);
       document.body.style.setProperty("--duration", inputTime+"s");
     };
@@ -174,5 +174,6 @@ Pulsing not working in IE.
 Adding the xlin xmins version stuff didn't make a difference.
 Not checked recently in Safari?
 May have to resort to controlling more with JS instead of CSS?
+Might control number input with a RegEx?
 may addEventListener("keypress", function(event) { document.body.innerHTML+=(fromCharCode(event.charCode));
 -->
