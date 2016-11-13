@@ -5,29 +5,34 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>Breath by 5ab</title>
   
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/github-dark.css">
-
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <!--[if lt IE 8]>
-    <link rel="stylesheet" href="stylesheets/ie.css">
-    <![endif]-->
-    <!--[if !IE]><script>fixScale(document);</script><![endif]--> 
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    
     <!--  My Styles  -->
     <style>
+      body {
+        background-color: #272726;
+        color: beige;
+        text-align: center;
+        margin: auto;
+      }
+      .notes {
+        color: white;
+        text-align: left;
+      }
+      button, input {
+        font-weight: bold;
+         border-radius: 0.4pc;
+      }
       img {
         display: block; 
         margin-left: auto; 
         margin-right: auto;
       }
-    /*  -----  Tweaking colours, later duration & timing  -----  */
-    /*  I should only need to specify ':root'  */
-      body, :root {
+    /*  -----  Tweaking colours, later duration inc min / max & timing  -----  */
+      :root {
         --innerFlameColour: pink;
         --duration: 10s;
+        --min: 5;
+        --max: 30;
         --halfTime: calc(var(--duration)/2);
       }
       #innerFlame:hover {
@@ -83,77 +88,78 @@
   </head>
   
   <body>
-    <div class="wrapper">
-      <section>
-        <div id="title">
-          <h1>Breath</h1>
-          <p>Relaxing rhythmic breathing</p>
-        </div>
-        <?xml-stylesheet type="text/css" href="svg.css" ?>
-        <svg height="550" width="550" viewBox="0 0 550 550" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
-          <title> Candle Flame </title>
-          <defs>
-            <filter id="gBlur">
-              <feGaussianBlur stdDeviation="1" />
-            </filter>
-            <radialGradient id="rGrad1" gradientUnits="userSpaceOnUse" cx="372" cy="526" gradientTransform="translate(128 127) scale(0.7)" r="370">
-              <stop stop-color="#fcb900" offset="0"/>
-              <stop stop-color="#fcb900" stop-opacity="0" offset="1"/>
-            </radialGradient>
-          </defs>
-          <g transform="translate(-129 -238)">
-            <g id="aura">
-              <circle id="glow" cx="395" cy="504" r="265" fill="url(#rGrad1)"/>
-              <circle id="spot" cx="395" cy="745" r="10" filter="url(#gBlur)"/>
-            </g>
-            <g id="flames">
-              <path id="flamePath" d="M412 403c -26 17 -48 40 -64 67 -10 16 -18 33 -21 52 -3 19 0.3  39 11 54 7 10 16 17 27 22s 23 7 34 7c 14 0 28 -3 39 -11 12 -7 21 -19 24 -32 3 -13 -0.5 -27 -6 -40 -6 -12 -13 -24 -20 -36 -14 -25 -22 -54 -24 -83z" fill-rule="evenodd"/>
-              <use id="outerFlame" xlink:href="#flamePath" transform="matrix(1.1503 0 0 1.1383 -55.826 -73.362)" height="100%" width="100%" fill="#ffa52a"/>
-              <use id="innerFlame" xlink:href="#flamePath" transform="matrix(.398 0 0 .398 237.62 364.97)" height="100%" width="100%" fill="#fdfdfd"/>
-            </g>
-          </g>
-        </svg>
-        <br>
-        <br> 
-        <form onsubmit="setDuration(); return false">
-          <button onclick="minusDuration()" type="button"> MINUS </button> 
-          <input id="inputDur" oninput="" value="" type="number" placeholder="" min="5" max="30" maxlength="2" size="3" autofocus>  
-          <button onclick="plusDuration()" type="button"> PLUS </button> Set the speed here
-          <input type="submit" value="SUBMIT">
-        </form>
-        <br>
-        <br>
-        <p>
-          Coming.. A simple place to practice paced rhythmic breathing.  Studies have shown this to be a very effective way of reducing stress.  And improving concentration and well being.
-          <br>
-          NOTE: Doesn't currently work in Internet Explorer or Edge.
-        </p>
-      </section>
-    </div>
+    <h1 style="text-align: center;">Breath</h1>
+    <p>Relaxing rhythmic breathing</p>
+    <svg height="550" width="550" viewBox="0 0 550 550" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+      <title> Candle Flame </title>
+      <defs>
+        <filter id="gBlur">
+          <feGaussianBlur stdDeviation="1" />
+        </filter>
+        <radialGradient id="rGrad1" gradientUnits="userSpaceOnUse" cx="372" cy="526" gradientTransform="translate(128 127) scale(0.7)" r="370">
+          <stop stop-color="#fcb900" offset="0"/>
+          <stop stop-color="#fcb900" stop-opacity="0" offset="1"/>
+        </radialGradient>
+      </defs>
+      <g transform="translate(-129 -238)">
+        <g id="aura">
+          <circle id="glow" cx="395" cy="504" r="265" fill="url(#rGrad1)"/>
+          <circle id="spot" cx="395" cy="745" r="10" filter="url(#gBlur)"/>
+        </g>
+        <g id="flames">
+          <path id="flamePath" d="M412 403c -26 17 -48 40 -64 67 -10 16 -18 33 -21 52 -3 19 0.3  39 11 54 7 10 16 17 27 22s 23 7 34 7c 14 0 28 -3 39 -11 12 -7 21 -19 24 -32 3 -13 -0.5 -27 -6 -40 -6 -12 -13 -24 -20 -36 -14 -25 -22 -54 -24 -83z" fill-rule="evenodd"/>
+          <use id="outerFlame" xlink:href="#flamePath" transform="matrix(1.1503 0 0 1.1383 -55.826 -73.362)" height="100%" width="100%" fill="#ffa52a"/>
+          <use id="innerFlame" xlink:href="#flamePath" transform="matrix(.398 0 0 .398 237.62 364.97)" height="100%" width="100%" fill="#fdfdfd"/>
+        </g>
+      </g>
+    </svg>
+    <br>
+    <br> 
+    <form onsubmit="setDuration(); return false">
+      <button onclick="minusDuration()" type="button"> - </button> 
+      <input id="inputDur" oninput="" value="" type="number" placeholder="" maxlength="2" size="3" autofocus>  
+      <button onclick="plusDuration()" type="button"> + </button> Set the speed here
+      <input type="submit" value="SUBMIT">
+    </form>
+    <br>
+    <br>
+    <p class="notes">
+      Coming.. A simple place to practice paced rhythmic breathing.  Studies have shown this to be a very effective way of reducing stress.  And improving concentration and well being.
+      <br>
+      NOTE: Doesn't currently work in Internet Explorer or Edge.
+    </p>
   </body>
   <!--      MY SCRIPTS      -->
-  <script>
-    
+  <script> 
     var styles = window.getComputedStyle(document.body),
       duration = styles.getPropertyValue("--duration"),
+      min = Number(styles.getPropertyValue("--min")),
+      max = Number(styles.getPropertyValue("--max")),
       inputDur = document.getElementById("inputDur");
     inputDur.value=Number(duration.slice(0,-1));
 
   //  Keeping input to 'max' & 'min'.  And updating the CSS variable 'duration'  //
     //   This is not perfect, 12, 23 etc are prevented!   //
+    var checkMinus = function () {
+      inputDur.value = Math.abs(inputDur.value);
+    };
     var checkDuration = function () {
-      inputDur.value = Number(inputDur.value) > Number(inputDur.max) ? inputDur.max : inputDur.value ;
-      inputDur.value = Number(inputDur.value) < Number(inputDur.min) ? inputDur.min : inputDur.value ;
+      inputDur.value = Number(inputDur.value) > max ? max : inputDur.value ;
+      inputDur.value = Number(inputDur.value) < min ? min : inputDur.value ;
     };
     var minusDuration = function () {
+      checkMinus();
       inputDur.value -- ;
       checkDuration();
     };
     var plusDuration = function () {
+      checkMinus();
       inputDur.value ++ ;
       checkDuration();
     };
     var setDuration = function () {
+      checkMinus();
+      checkDuration();
       var inputTime = String(inputDur.value);
       document.body.style.setProperty("--duration", inputTime+"s");
     };
@@ -168,6 +174,5 @@ Pulsing not working in IE.
 Adding the xlin xmins version stuff didn't make a difference.
 Not checked recently in Safari?
 May have to resort to controlling more with JS instead of CSS?
-Changing the 'duration' with JS in Chrome & FF works for both 'body' & ":root'.
-addEventListener("keypress", function(event) { document.body.innerHTML+=(fromCharCode(event.charCode));
+may addEventListener("keypress", function(event) { document.body.innerHTML+=(fromCharCode(event.charCode));
 -->
