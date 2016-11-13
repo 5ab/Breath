@@ -20,7 +20,17 @@
       }
       button, input {
         font-weight: bold;
-         border-radius: 0.4pc;
+        border-radius: 0.4pc;
+      }
+      /*  remove little up down arrows Chrome  */
+      input[type=number]::-webkit-inner-spin-button, 
+      input[type=number]::-webkit-outer-spin-button { 
+        -webkit-appearance: none; 
+        margin: 0;
+      }
+      /*  remove little up down arrows Firefox  */
+      input[type=number] {
+        -moz-appearance: textfield;
       }
       img {
         display: block; 
@@ -117,7 +127,7 @@
     <br> 
     <form onsubmit="setDuration(); return false">
       <button onclick="minusDuration()" type="button"> - </button> 
-      <input id="inputDur" oninput="checkMinus()" value="" type="number" placeholder="" autofocus>  
+      <input id="inputDur" oninput="checkMinus()" value="" type="number" placeholder="" autofocus style="max-width: 2rem;">  
       <button onclick="plusDuration()" type="button"> + </button> Set the speed here
       <input type="submit" value="SUBMIT">
     </form>
@@ -175,5 +185,6 @@ Adding the xlin xmins version stuff didn't make a difference.
 Not checked recently in Safari?
 May have to resort to controlling more with JS instead of CSS?
 Might control number input with a RegEx?
+Is there a neater way to hide the 'input' field spinner arrow?? 
 may addEventListener("keypress", function(event) { document.body.innerHTML+=(fromCharCode(event.charCode));
 -->
